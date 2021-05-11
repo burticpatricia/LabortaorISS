@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id = "jdbcProps" location="classpath:server.properties"/>
+
+    <bean id="clientiOrmRepository" class="mo.persistence.orm.ClientiOrmRepository"/>
+
+    <bean id="produseOrmRepository" class="mo.persistence.orm.ProduseOrmRepository"/>
+
+    <bean id="service" class="mo.server.Service">
+        <constructor-arg ref="clientiOrmRepository" />
+        <constructor-arg ref="produseOrmRepository" />
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="serviceName" value="MOService"/>
+        <property name="service" ref="service"/>
+        <property name="serviceInterface" value="mo.services.IService"/>
+        <property name="servicePort" value="1099"/>
+    </bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="462.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mo.client.controllers.OrdersController">
+    <children>
+        <TableView layoutX="61.0" layoutY="80.0" prefHeight="276.0" prefWidth="321.0">
+            <columns>
+                <TableColumn prefWidth="132.66665649414062" text="ID" />
+                <TableColumn prefWidth="113.0" text="Data" />
+                <TableColumn prefWidth="73.0" text="Status" />
+            </columns>
+        </TableView>
+        <TextField editable="false" layoutX="473.0" layoutY="87.0" promptText="Adresa" />
+        <Label layoutX="401.0" layoutY="91.0" text="Adresa:" />
+        <Label layoutX="398.0" layoutY="222.0" text="Produse:" />
+      <Label layoutX="292.0" layoutY="29.0" text="Comenzile mele" />
+      <TextArea layoutX="447.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="489.0" layoutY="356.0" mnemonicParsing="false" style="-fx-background-color: #ff6161;" text="Anuleaza comanda" />
+    </children>
+</AnchorPane>
