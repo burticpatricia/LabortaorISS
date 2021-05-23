@@ -17,7 +17,7 @@
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" onAction="#allProducts" text="Toate produsele" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" text="Cos de cumparaturi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#myBasket" text="Cos de cumparaturi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" text="Comenzile mele" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
          </children>
       </GridPane>

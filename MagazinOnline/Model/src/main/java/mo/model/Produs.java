@@ -52,6 +52,16 @@ public class Produs extends Entity implements Serializable {
     }
 
     @Override
+    public long getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Produs)) return false;
@@ -74,6 +84,7 @@ public class Produs extends Entity implements Serializable {
                 ", producator='" + producator + '\'' +
                 ", pret=" + pret +
                 ", stoc=" + stoc +
+                ", id = "+this.getId()+
                 '}';
     }
 }

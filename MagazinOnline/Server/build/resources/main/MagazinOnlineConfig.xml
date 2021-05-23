@@ -9,9 +9,12 @@
 
     <bean id="produseOrmRepository" class="mo.persistence.orm.ProduseOrmRepository"/>
 
+    <bean id="comenziOrmRepository" class="mo.persistence.orm.ComenziOrmRepository"/>
+
     <bean id="service" class="mo.server.Service">
         <constructor-arg ref="clientiOrmRepository" />
         <constructor-arg ref="produseOrmRepository" />
+        <constructor-arg ref="comenziOrmRepository" />
     </bean>
 
     <bean class="org.springframework.remoting.rmi.RmiServiceExporter">

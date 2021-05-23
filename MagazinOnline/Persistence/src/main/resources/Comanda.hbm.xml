@@ -12,23 +12,26 @@
 
 <hibernate-mapping package="mo.model">
 
-    <class name="Client" table="Client">
+    <class name="Comanda" table="Comanda">
         <id name="id" column="id">
             <generator class="increment"/>
         </id>
-        <property name="numeUtilizator" column="nume_utilizator"/>
-        <property name="parola" column="parola"/>
-        <property name="numeComplet" column="nume_complet"/>
-        <set name="cosCumparaturi" table="ClientProdus" cascade="save-update" lazy="false">
-            <key column="client_id" not-null="true"/>
+        <property name="data" column="data"/>
+        <property name="livrata" column="livrata"/>
+        <property name="oras" column="oras"/>
+        <property name="judet" column="judet"/>
+        <property name="strada" column="strada"/>
+        <property name="codPostal" column="codPostal"/>
+        <set name="produse" table="ComenziProduse" cascade="save-update" lazy="false">
+            <key column="com_id" not-null="true"/>
             <many-to-many entity-name="mo.model.Produs">
                 <column name="produs_id" not-null="true"/>
             </many-to-many>
         </set>
-        <set name="comenzi" table="Comanda" inverse="true" cascade="save-update" lazy="false" fetch="select">
-            <key column="id" not-null="true"/>
-            <one-to-many class="mo.model.Comanda"/>
-        </set>
+        <many-to-one name="client" class="mo.model.Client" fetch="select" lazy="false">
+            <column name="client_id" not-null="true"/>
+        </many-to-one>
+
     </class>
 
 </hibernate-mapping>

@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="462.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mo.client.controllers.BasketController">
     <children>
-        <TableView layoutX="61.0" layoutY="80.0" prefHeight="276.0" prefWidth="321.0">
+        <TableView fx:id="productsTable" layoutX="61.0" layoutY="80.0" prefHeight="276.0" prefWidth="321.0">
             <columns>
-                <TableColumn prefWidth="132.66665649414062" text="Denumire produs" />
-                <TableColumn prefWidth="113.0" text="Producator" />
-                <TableColumn prefWidth="73.0" text="Pret" />
+                <TableColumn prefWidth="121.33334350585938" text="Denumire produs">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="denumire" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="106.33331298828125" text="Producator">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="producator" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="91.33333333333331" text="Pret">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="pret" />
+                    </cellValueFactory>
+                </TableColumn>
             </columns>
         </TableView>
         <Label layoutX="489.0" layoutY="71.0" text="Adresa de livrare:" />
         <Label layoutX="292.0" layoutY="29.0" text="Cos de cumparaturi" />
-        <Button layoutX="471.0" layoutY="330.0" mnemonicParsing="false" style="-fx-background-color: ffe180;" text="Plaseaza comanda" />
+        <Button layoutX="471.0" layoutY="330.0" mnemonicParsing="false" onAction="#placeOrder" style="-fx-background-color: ffe180;" text="Plaseaza comanda" />
       <Label layoutX="406.0" layoutY="162.0" text="Strada:" />
       <Label layoutX="409.0" layoutY="99.0" text="Judet:" />
       <Label layoutX="411.0" layoutY="130.0" text="Oras:" />
       <Label layoutX="394.0" layoutY="199.0" text="Cod postal:" />
-      <TextField layoutX="455.0" layoutY="95.0" />
-      <TextField layoutX="455.0" layoutY="126.0" />
-      <TextField layoutX="455.0" layoutY="158.0" />
-      <TextField layoutX="455.0" layoutY="195.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="judet" layoutX="455.0" layoutY="95.0" />
+      <TextField fx:id="oras" layoutX="455.0" layoutY="126.0" />
+      <TextField fx:id="strada" layoutX="455.0" layoutY="158.0" />
+      <TextField fx:id="codPostal" layoutX="455.0" layoutY="195.0" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="535.0" layoutY="293.0" text="Pret total:" />
       <Label layoutX="593.0" layoutY="293.0" text="0 Lei" />
+      <Button layoutX="35.0" layoutY="16.0" mnemonicParsing="false" onAction="#goBack" text="Inapoi" />
     </children>
 </AnchorPane>

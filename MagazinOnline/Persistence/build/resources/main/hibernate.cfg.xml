@@ -19,5 +19,6 @@
 
         <mapping resource="Client.hbm.xml"/>
         <mapping resource="Produs.hbm.xml"/>
+        <mapping resource="Comanda.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

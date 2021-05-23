@@ -33,7 +33,19 @@ public class ProduseOrmRepository implements IProdusRepository {
 
     @Override
     public void update(Produs produs) {
-
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = null;
+            try{
+                transaction = session.beginTransaction();
+                System.out.println("ProduseOrmRepository update...session.beginTransaction()");
+                session.update(produs);
+                System.out.println("ProduseOrmRepository update...session.createQuery()");
+                transaction.commit();
+                System.out.println("ProduseOrmRepository update...transaction.commit()");
+            }catch(RuntimeException e){
+                if (transaction != null) transaction.rollback();
+            }
+        }
     }
 
     @Override
@@ -49,7 +61,7 @@ public class ProduseOrmRepository implements IProdusRepository {
             try{
                 transaction = session.beginTransaction();
                 System.out.println("ProduseOrmRepository findAll...session.beginTransaction() ");
-                Query q = session.createQuery("from Produs");
+                Query q = session.createQuery("select p from Produs p");
                 produse = q.list();
                 System.out.println("ProduseOrmRepository findAll...session.createQuery()");
                 transaction.commit();

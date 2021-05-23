@@ -51,7 +51,19 @@ public class ClientiOrmRepository implements IClientRepository {
 
     @Override
     public void update(Client client) {
-
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = null;
+            try{
+                transaction = session.beginTransaction();
+                System.out.println("UsersORMRepository update...session.beginTransaction()");
+                session.update(client);
+                System.out.println("UsersORMRepository update...session.createQuery()");
+                transaction.commit();
+                System.out.println("UsersORMRepository update...transaction.commit()");
+            }catch(RuntimeException e){
+                if (transaction != null) transaction.rollback();
+            }
+        }
     }
 
     @Override

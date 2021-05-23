@@ -1,6 +1,8 @@
 package mo.model;
 
-public class Entity {
+import java.io.Serializable;
+
+public class Entity implements Serializable {
     private long id;
 
     public long getId() {
