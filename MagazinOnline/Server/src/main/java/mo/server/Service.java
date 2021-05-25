@@ -52,27 +52,23 @@ public class Service implements IService {
     }
 
     @Override
-    public void logout(Client user, IObserver observer) throws Exception {
-        IObserver localClient = loggedUsers.remove(user.getNumeUtilizator());
-        if(localClient == null)
-            throw new Exception("Utilizatorul "+user.getNumeUtilizator()+" nu este logat!");
-
-    }
-
-    @Override
     public List<Produs> findAllProducts() throws Exception {
         return produsRepository.findAll();
     }
 
     @Override
     public void addProductInBasket(Client user, Produs product) throws Exception {
-        if(clientRepository.findByUsernameAndPassword(user.getNumeUtilizator(), user.getParola()).getCosCumparaturi().contains(product))
-            throw new Exception("Produs deja adaugat in cosul de cunparaturi!\n");
+        user = clientRepository.findByUsernameAndPassword(user.getNumeUtilizator(), user.getParola());
+        if(user.getCosCumparaturi().contains(product))
+            throw new Exception("Produs deja adaugat in cosul de cumparaturi!\n");
         if(product.getStoc()>0) {
+            System.out.println("AM INTRAT AICI");
             var list = user.getCosCumparaturi();
             list.add(product);
             user.setCosCumparaturi(list);
             clientRepository.update(user);
+            user = clientRepository.findByUsernameAndPassword(user.getNumeUtilizator(), user.getParola());
+            System.out.println("DUPA ADD"+user.getCosCumparaturi());
             product.setStoc(product.getStoc() - 1);
             produsRepository.update(product);
             notifyClients();
@@ -83,8 +79,6 @@ public class Service implements IService {
 
     @Override
     public void placeOrder(Comanda order) throws Exception {
-        System.out.println("Comanda ");
-        order.getClient().getCosCumparaturi().forEach(System.out::println);
         if(order.getClient().getCosCumparaturi().size() == 0)
             throw new Exception("Nu aveti niciun produs adaugat in cos");
         else if(order.getProduse().stream().anyMatch(x->x.getStoc()==0)) {
@@ -107,6 +101,18 @@ public class Service implements IService {
     @Override
     public List<Produs> getUserBasket(Client client) {
         return new ArrayList<>(clientRepository.findByUsernameAndPassword(client.getNumeUtilizator(), client.getParola()).getCosCumparaturi());
+    }
+
+    @Override
+    public List<Comanda> getUserOrders(Client client) {
+        return comandaRepository.getClientOrders(client);
+    }
+
+    @Override
+    public void cancelOrder(Comanda order) throws Exception {
+        if(order.isLivrata())
+            throw new Exception("Comanda nu poate fi anulata deoarece a fost deja livrata!\n");
+        comandaRepository.delete(order);
     }
 
     private void notifyClients() {

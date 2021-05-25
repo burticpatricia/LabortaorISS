@@ -37,7 +37,7 @@
       <TextField fx:id="strada" layoutX="455.0" layoutY="158.0" />
       <TextField fx:id="codPostal" layoutX="455.0" layoutY="195.0" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="535.0" layoutY="293.0" text="Pret total:" />
-      <Label layoutX="593.0" layoutY="293.0" text="0 Lei" />
+      <Label fx:id="pretTotal" layoutX="593.0" layoutY="293.0" text="0 Lei" />
       <Button layoutX="35.0" layoutY="16.0" mnemonicParsing="false" onAction="#goBack" text="Inapoi" />
     </children>
 </AnchorPane>

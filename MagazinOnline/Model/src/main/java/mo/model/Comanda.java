@@ -132,7 +132,9 @@ public class Comanda extends Entity implements Serializable {
                 ", judet='" + judet + '\'' +
                 ", strada='" + strada + '\'' +
                 ", codPostal='" + codPostal + '\'' +
-                ", id = "+this.getId()+
-                "} " ;
+                ", produse=" + produse +
+                ", client=" + client +
+                ", id = " + this.getId()+
+                "} ";
     }
 }

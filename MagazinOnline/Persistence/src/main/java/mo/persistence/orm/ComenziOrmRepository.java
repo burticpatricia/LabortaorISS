@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComenziOrmRepository implements IComandaRepository {
@@ -35,6 +36,19 @@ public class ComenziOrmRepository implements IComandaRepository {
 
     @Override
     public void delete(Comanda comanda) {
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = null;
+            try{
+                transaction = session.beginTransaction();
+                System.out.println("ComenziOrmRepositoryComenziOrmRepository delete...session.beginTransaction() ");
+                session.delete(comanda);
+                System.out.println("ComenziOrmRepository delete...session.createQuery()");
+                transaction.commit();
+                System.out.println("ComenziOrmRepository delete...transaction.commit()");
+            }catch(RuntimeException e){
+                if (transaction != null) transaction.rollback();
+            }
+        }
 
     }
 
@@ -55,6 +69,23 @@ public class ComenziOrmRepository implements IComandaRepository {
 
     @Override
     public List<Comanda> getClientOrders(Client client) {
-        return null;
+        List orders = new ArrayList<>();
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = null;
+            try{
+                transaction = session.beginTransaction();
+                System.out.println("ComenziOrmRepository getClientOrders...session.beginTransaction()");
+                Query q = session.createQuery("from Comanda where client_id = :var");
+                q.setParameter("var",client.getId());
+                orders = q.list();
+                System.out.println("ComenziOrmRepository getClientOrders...session.createQuery()");
+                transaction.commit();
+                System.out.println("ComenziOrmRepository getClientOrders...transaction.commit()");
+            }catch(RuntimeException e){
+                if (transaction != null) transaction.rollback();
+            }
+        }
+        System.out.println("Exiting with "+orders.size()+" values");
+        return orders;
     }
 }

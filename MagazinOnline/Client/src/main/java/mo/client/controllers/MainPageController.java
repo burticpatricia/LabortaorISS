@@ -69,4 +69,16 @@ public class MainPageController extends UnicastRemoteObject implements Controlle
         scene.setRoot(root);
         stage.setScene(scene);
     }
+
+    public void myOrders(ActionEvent actionEvent) throws IOException {
+        FXMLLoader cloader = new FXMLLoader();
+        cloader.setLocation(getClass().getResource("/ordersView.fxml"));
+        Parent root = cloader.load();
+        OrdersController ctrl = cloader.getController();
+
+        ctrl.setContext(productsController,this.root,service,stage,connectedUser);
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
+        stage.setScene(scene);
+    }
 }

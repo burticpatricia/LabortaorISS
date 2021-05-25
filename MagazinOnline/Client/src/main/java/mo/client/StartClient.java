@@ -36,6 +36,7 @@ public class StartClient extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Welcome!");
+        primaryStage.setOnCloseRequest(event->System.exit(0));
         primaryStage.show();
 
     }

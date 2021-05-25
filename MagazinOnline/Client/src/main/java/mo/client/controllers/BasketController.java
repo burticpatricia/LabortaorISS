@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ public class BasketController implements Controller {
     public TextField strada;
     public TextField codPostal;
     public TableView<Produs> productsTable;
+    public Label pretTotal;
     private Client connectedUser;
     private ProductsController productsController;
     private Parent root;
@@ -30,6 +32,7 @@ public class BasketController implements Controller {
 
     @Override
     public void initialize() {
+
 
     }
 
@@ -45,7 +48,13 @@ public class BasketController implements Controller {
     public void initModel(){
         try {
             productsTable.getItems().clear();
-            productsTable.getItems().addAll(service.getUserBasket(connectedUser));
+            var list = service.getUserBasket(connectedUser);
+            productsTable.getItems().addAll(list);
+            int pret = 0;
+            for(Produs p: list){
+                pret+=p.getPret();
+            }
+            pretTotal.setText(pret+" lei");
         } catch (Exception e) {
             MessageBox.showErrorMessage(null,"Eroare la initModel() "+ e.getMessage());
         }

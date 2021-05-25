@@ -60,6 +60,7 @@ public class LoginController extends UnicastRemoteObject implements Controller{
             Scene scene = new Scene(mroot);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Magazin Online");
+            primaryStage.setOnCloseRequest(event->System.exit(0));
             primaryStage.show();
         } catch (Exception e) {
             MessageBox.showErrorMessage(null,e.getMessage());

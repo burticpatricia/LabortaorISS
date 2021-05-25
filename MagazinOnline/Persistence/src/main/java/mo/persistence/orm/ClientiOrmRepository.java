@@ -56,6 +56,7 @@ public class ClientiOrmRepository implements IClientRepository {
             try{
                 transaction = session.beginTransaction();
                 System.out.println("UsersORMRepository update...session.beginTransaction()");
+                System.out.println("IN REPO: "+ client.getCosCumparaturi());
                 session.update(client);
                 System.out.println("UsersORMRepository update...session.createQuery()");
                 transaction.commit();
